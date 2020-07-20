@@ -22,6 +22,7 @@ jobs:
           path: sysmonconfig.xml
   test-config:
     runs-on: windows-latest
+    needs: generate-config
     steps:
       - uses: actions/download-artifact@v2
         with:
