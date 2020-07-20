@@ -20,3 +20,19 @@ jobs:
         with:
           name: sysmonconfig
           path: sysmonconfig.xml
+  test-config:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: sysmonconfig
+      - name: Download latest Sysmon
+        uses: carlosperate/download-file-action@v1.0.3
+        with:
+          file-url: https://download.sysinternals.com/files/Sysmon.zip
+      - name: Unzip Sysmon
+        run: Expand-Archive Sysmon.zip -DestinationPath .
+        shell: pwsh
+      - name: Install Sysmon with generated config
+        run: .\Sysmon64.exe -accepteula -i sysmonconfig.xml
+        shell: pwsh
