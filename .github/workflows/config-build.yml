@@ -27,6 +27,9 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: sysmonconfig
+      - name: Remove prebuild config
+        run: Remove-Item .\sysmonconfig.xml
+        shell: pwsh
       - name: Download latest Sysmon
         uses: carlosperate/download-file-action@v1.0.3
         with:
