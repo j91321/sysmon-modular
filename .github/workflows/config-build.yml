@@ -24,12 +24,13 @@ jobs:
     runs-on: windows-latest
     needs: generate-config
     steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: sysmonconfig
       - name: Remove prebuild config
         run: Remove-Item .\sysmonconfig.xml
         shell: pwsh
+      - name: Download artifact from generate-config job
+        uses: actions/download-artifact@v2
+        with:
+          name: sysmonconfig
       - name: Download latest Sysmon
         uses: carlosperate/download-file-action@v1.0.3
         with:
